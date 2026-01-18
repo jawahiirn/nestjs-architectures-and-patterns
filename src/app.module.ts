@@ -7,7 +7,7 @@ import { ApplicationBootstrapOptions } from './common/interfaces/application-boo
 import { InfrastructureModule } from './alarms/infrastructure/alarms-infrastructure.module';
 
 @Module({
-  imports: [CoreModule],
+  imports: [],
   controllers: [AppController],
   providers: [AppService],
 })
