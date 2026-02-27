@@ -11,7 +11,7 @@ export class OrmAlarmRepository implements AlarmRepository {
   constructor(
     @InjectRepository(AlarmEntity)
     private readonly alarmRepository: Repository<AlarmEntity>,
-  ) {}
+  ) { }
 
   async findAll(): Promise<Alarm[]> {
     const entities = await this.alarmRepository.find();
