@@ -5,9 +5,10 @@ import { AlarmsModule } from './alarms/application/alarms.module';
 import { CoreModule } from './core/core.module';
 import { ApplicationBootstrapOptions } from './common/interfaces/application-bootstrap-options.interface';
 import { AlarmInfrastructureModule } from './alarms/infrastructure/alarm-infrastructure.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [CoreModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), CoreModule],
   controllers: [AppController],
   providers: [AppService],
 })

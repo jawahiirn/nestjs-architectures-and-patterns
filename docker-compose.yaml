@@ -4,6 +4,8 @@ services:
     image: postgres
     restart: always
     ports:
-      - "5432:5432"
+      - "${DATABASE_PORT}:5432"
     environment:
-      POSTGRES_PASSWORD: some-password
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}

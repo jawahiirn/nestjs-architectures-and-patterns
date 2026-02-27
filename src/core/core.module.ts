@@ -10,10 +10,11 @@ export class CoreModule {
         ? [
             TypeOrmModule.forRoot({
               type: 'postgres',
-              host: 'localhost',
-              port: 5432,
-              password: 'some-password',
-              username: 'postgres',
+              host: process.env.DATABASE_HOST,
+              port: parseInt(process.env.DATABASE_PORT || '5432', 10),
+              password: process.env.DATABASE_PASSWORD,
+              username: process.env.DATABASE_USER,
+              database: process.env.DATABASE_NAME,
               autoLoadEntities: true,
               synchronize: true,
             }),
