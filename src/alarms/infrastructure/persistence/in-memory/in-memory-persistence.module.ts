@@ -12,4 +12,4 @@ import { InMemoryAlarmRepository } from './repositories/alarm.repository';
   ],
   exports: [AlarmRepository],
 })
-export class OrmAlarmPersistenceModule {}
+export class InMemoryPersistenceModule {}
