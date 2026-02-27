@@ -4,7 +4,7 @@ import { InMemoryPersistenceModule } from './persistence/in-memory/in-memory-per
 
 @Module({})
 export class AlarmInfrastructureModule {
-  static use(driver: 'orm' | 'driver') {
+  static use(driver: 'orm' | 'in-memory') {
     const persistenceModule =
       driver === 'orm' ? OrmAlarmPersistenceModule : InMemoryPersistenceModule;
     return {
