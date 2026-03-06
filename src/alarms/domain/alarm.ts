@@ -6,7 +6,7 @@ export class Alarm {
   public severity: AlarmSeverity;
   public triggeredAt: Date;
   public isAcknowledged: boolean = false;
-  public items: Array<AlarmItem>;
+  public items = new Array<AlarmItem>();
   constructor(public id: string) {}
 
   acknowledge() {

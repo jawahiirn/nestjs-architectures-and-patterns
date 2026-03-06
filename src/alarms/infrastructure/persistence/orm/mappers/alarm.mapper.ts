@@ -15,7 +15,7 @@ export class AlarmMapper {
     alarmModel.name = alarmEntity.name;
     alarmModel.isAcknowledged = alarmEntity.isAcknowledged;
     alarmModel.triggeredAt = alarmEntity.triggeredAt;
-    alarmModel.items = alarmEntity.items.map(
+    alarmModel.items = (alarmEntity.items || []).map(
       (item) => new AlarmItem(item.id, item.name, item.type),
     );
 
