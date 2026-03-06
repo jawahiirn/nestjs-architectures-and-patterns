@@ -19,7 +19,12 @@ export class CreateAlarmCommandHandler implements ICommandHandler<CreateAlarmCom
     this.logger.debug(
       `Processing "CreateAlarmCommand": ${JSON.stringify(command)}`,
     );
-    const alarm = this.alarmFactory.create(command.name, command.severity);
+    const alarm = this.alarmFactory.create(
+      command.name,
+      command.severity,
+      command.triggeredAt,
+      command.items,
+    );
 
     // TODO: Dispatch the events from aggregate root, inside the domain layer
     this.eventBus.publish(new AlarmCreatedEvent(alarm));
