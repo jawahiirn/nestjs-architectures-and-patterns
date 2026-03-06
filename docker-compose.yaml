@@ -14,4 +14,4 @@ services:
     ports:
       - "27017:27017"
     environment:
-      - MONGODB_DATABASE:"vf-read-db"
+      - MONGO_INITDB_DATABASE:"vf-read-db"

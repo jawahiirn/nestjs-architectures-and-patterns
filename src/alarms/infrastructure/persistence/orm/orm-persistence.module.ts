@@ -1,18 +1,24 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AlarmEntity } from './entities/alarm.entity';
-import { AlarmRepository } from '../../../application/ports/alarm.repository';
+import { CreateAlarmRepository } from '../../../application/ports/create-alarm.repository';
 import { OrmAlarmRepository } from './repositories/alarm.repository';
 import { AlarmItemEntity } from './entities/alarm-item.entity';
+import { FindAlarmsRepository } from '../../../application/ports/find-alarms.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([AlarmEntity, AlarmItemEntity])],
   providers: [
+    OrmAlarmRepository,
     {
-      provide: AlarmRepository,
-      useClass: OrmAlarmRepository,
+      provide: CreateAlarmRepository,
+      useExisting: OrmAlarmRepository,
+    },
+    {
+      provide: FindAlarmsRepository,
+      useExisting: OrmAlarmRepository,
     },
   ],
-  exports: [AlarmRepository],
+  exports: [CreateAlarmRepository, FindAlarmsRepository],
 })
-export class OrmAlarmPersistenceModule {}
+export class OrmAlarmPersistenceModule { }
