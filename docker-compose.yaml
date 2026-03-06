@@ -11,7 +11,18 @@ services:
       POSTGRES_DB: ${DATABASE_NAME}
   read-db:
     image: mongo
+    restart: always
     ports:
       - "27017:27017"
     environment:
-      - MONGO_INITDB_DATABASE:"vf-read-db"
+      - MONGO_INITDB_DATABASE="vf-read-db"
+  event-store:
+    image: mongo:6.0.4
+    restart: always
+    ports:
+      - "27018:27017"
+    environment:
+      - MONGO_INITDB_DATABASE="vf-event-store"
+    command: mongod --replSet vf-event-store-repl-set
+    volumes:
+      - ./script/events-store-mongoinit.js:/docker-entrypoint-initdb.d/mong-init.js:ro
