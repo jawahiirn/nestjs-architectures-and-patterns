@@ -7,16 +7,12 @@ import { Alarm } from '../../../../domain/alarm';
 import { AlarmMapper } from '../mappers/alarm.mapper';
 
 @Injectable()
-export class OrmAlarmRepository implements CreateAlarmRepository {
+export class OrmCreateAlarmRepository implements CreateAlarmRepository {
   constructor(
     @InjectRepository(AlarmEntity)
     private readonly alarmRepository: Repository<AlarmEntity>,
   ) {}
 
-  async findAll(): Promise<Alarm[]> {
-    const entities = await this.alarmRepository.find();
-    return entities.map((item) => AlarmMapper.toDomain(item));
-  }
   async save(alarm: Alarm): Promise<Alarm> {
     const persistenceModel = AlarmMapper.toPersistence(alarm);
     const newEntity = await this.alarmRepository.save(persistenceModel);
