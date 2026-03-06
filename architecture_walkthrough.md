@@ -111,7 +111,7 @@ src/
     │   ├── commands/
     │   │   └── create-alarm.command.ts   # Command object
     │   └── ports/
-    │       └── alarm.repository.ts  # Abstract port (repository contract)
+    │       └── create-alarm.repository.ts  # Abstract port (repository contract)
     ├── presenters/                  # ── PRESENTER LAYER (inbound) ──
     │   └── http/
     │       ├── alarms.controller.ts # HTTP REST controller
@@ -128,7 +128,7 @@ src/
             │   ├── mappers/
             │   │   └── alarm.mapper.ts      # Domain ⟷ Persistence mapper
             │   └── repositories/
-            │       └── alarm.repository.ts  # Concrete ORM repository
+            │       └── create-alarm.repository.ts  # Concrete ORM repository
             └── in-memory/           # ── IN-MEMORY ADAPTER ──
                 ├── in-memory-persistence.module.ts
                 ├── entities/
@@ -136,7 +136,7 @@ src/
                 ├── mappers/
                 │   └── alarm.mapper.ts      # Domain ⟷ Persistence mapper
                 └── repositories/
-                    └── alarm.repository.ts  # Concrete in-memory repository
+                    └── create-alarm.repository.ts  # Concrete in-memory repository
 ```
 
 ---
@@ -365,7 +365,7 @@ export class CreateAlarmCommand {
 
 ---
 
-#### [alarm.repository.ts (Port)](file:///d:/Projects/Next%20JS/advanced-architecture-patterns/src/alarms/application/ports/alarm.repository.ts)
+#### [create-alarm.repository.ts (Port)](file:///d:/Projects/Next%20JS/advanced-architecture-patterns/src/alarms/application/ports/alarm.repository.ts)
 **Role:** The **Port** — an abstract class defining the repository contract.
 
 ```typescript
@@ -448,7 +448,7 @@ static use(driver: 'orm' | 'in-memory') {
 | [orm-persistence.module.ts](file:///d:/Projects/Next%20JS/advanced-architecture-patterns/src/alarms/infrastructure/persistence/orm/orm-persistence.module.ts) | Registers TypeORM entity and binds `OrmAlarmRepository` to the `AlarmRepository` token |
 | [alarm.entity.ts (ORM)](file:///d:/Projects/Next%20JS/advanced-architecture-patterns/src/alarms/infrastructure/persistence/orm/entities/alarm.entity.ts) | TypeORM entity with `@Entity`, `@Column`, `@PrimaryColumn` decorators — maps to the `alarms` DB table |
 | [alarm.mapper.ts (ORM)](file:///d:/Projects/Next%20JS/advanced-architecture-patterns/src/alarms/infrastructure/persistence/orm/mappers/alarm.mapper.ts) | Bidirectional mapper: `toDomain()` converts DB rows to domain `Alarm` objects; `toPersistence()` does the reverse |
-| [alarm.repository.ts (ORM)](file:///d:/Projects/Next%20JS/advanced-architecture-patterns/src/alarms/infrastructure/persistence/orm/repositories/alarm.repository.ts) | Concrete implementation using TypeORM's `Repository<AlarmEntity>` to perform actual database operations |
+| [create-alarm.repository.ts (ORM)](file:///d:/Projects/Next%20JS/advanced-architecture-patterns/src/alarms/infrastructure/persistence/orm/repositories/alarm.repository.ts) | Concrete implementation using TypeORM's `Repository<AlarmEntity>` to perform actual database operations |
 
 **Key binding in the module:**
 ```typescript
@@ -468,7 +468,7 @@ exports: [AlarmRepository],
 | [in-memory-persistence.module.ts](file:///d:/Projects/Next%20JS/advanced-architecture-patterns/src/alarms/infrastructure/persistence/in-memory/in-memory-persistence.module.ts) | Binds `InMemoryAlarmRepository` to the `AlarmRepository` token — no DB imports needed |
 | [alarm.entity.ts (In-Memory)](file:///d:/Projects/Next%20JS/advanced-architecture-patterns/src/alarms/infrastructure/persistence/in-memory/entities/alarm.entity.ts) | Plain POJO with `id`, `name`, `severity` — no decorators, no DB coupling |
 | [alarm.mapper.ts (In-Memory)](file:///d:/Projects/Next%20JS/advanced-architecture-patterns/src/alarms/infrastructure/persistence/in-memory/mappers/alarm.mapper.ts) | Same `toDomain()` / `toPersistence()` contract but maps to plain POJOs instead of TypeORM entities |
-| [alarm.repository.ts (In-Memory)](file:///d:/Projects/Next%20JS/advanced-architecture-patterns/src/alarms/infrastructure/persistence/in-memory/repositories/alarm.repository.ts) | Uses a `Map<string, AlarmEntity>` to store data in memory — perfect for testing |
+| [create-alarm.repository.ts (In-Memory)](file:///d:/Projects/Next%20JS/advanced-architecture-patterns/src/alarms/infrastructure/persistence/in-memory/repositories/alarm.repository.ts) | Uses a `Map<string, AlarmEntity>` to store data in memory — perfect for testing |
 
 **Why both adapters have identical sub-structure:** This is intentional and extremely important. The **parallel structure** (`entities/`, `mappers/`, `repositories/`) makes it clear that each adapter is a self-contained implementation of the same port contract. Adding a third adapter (e.g., MongoDB) would follow the same template.
 
