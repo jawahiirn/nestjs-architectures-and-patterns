@@ -1,7 +1,7 @@
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { EventBus, IEvent, IEventPublisher } from '@nestjs/cqrs';
 import { VersionedAggregateRoot } from '../../../domain/aggregate-root';
-import { MongoEventStore } from '../serializers/mongo-event.store';
+import { MongoEventStore } from '../mongo-event.store';
 import { EventSerializer } from '../serializers/event.serializer';
 
 @Injectable()

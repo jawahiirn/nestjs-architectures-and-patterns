@@ -1,9 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { EVENT_STORE_CONNECTION } from '../../../../core/core.constants';
+import { EVENT_STORE_CONNECTION } from '../../../core/core.constants';
 import { Model } from 'mongoose';
-import { SerializableEvent } from '../../../domain/interfaces/serializable-event';
-import { Event } from '../schema/event.schema';
+import { SerializableEvent } from '../../domain/interfaces/serializable-event';
+import { Event } from './schema/event.schema';
 
 @Injectable()
 export class MongoEventStore {
