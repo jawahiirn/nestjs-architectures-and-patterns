@@ -25,4 +25,4 @@ services:
       - MONGO_INITDB_DATABASE="vf-event-store"
     command: mongod --replSet vf-event-store-repl-set
     volumes:
-      - ./script/events-store-mongoinit.js:/docker-entrypoint-initdb.d/mong-init.js:ro
+      - ./events-store-mongoinit.js:/docker-entrypoint-initdb.d/mong-init.js:ro
