@@ -24,6 +24,8 @@ export class AppModule {
     return {
       module: AppModule,
       imports: [
+        CqrsModule.forRoot(),
+        SharedModule,
         CoreModule.forRoot(options),
         AlarmsModule.withInfrastructure(
           AlarmInfrastructureModule.use(options.driver),

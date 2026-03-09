@@ -6,13 +6,12 @@ import { EventSerializer } from '../serializers/event.serializer';
 
 @Injectable()
 export class EventStorePublisher
-  implements OnApplicationBootstrap, IEventPublisher
-{
+  implements OnApplicationBootstrap, IEventPublisher {
   constructor(
     private readonly eventStore: MongoEventStore,
     private readonly eventBus: EventBus,
     private readonly eventSerializer: EventSerializer,
-  ) {}
+  ) { }
 
   onApplicationBootstrap(): void {
     this.eventBus.publisher = this;
