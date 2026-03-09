@@ -7,12 +7,14 @@ import { ApplicationBootstrapOptions } from './common/interfaces/application-boo
 import { AlarmInfrastructureModule } from './alarms/infrastructure/alarm-infrastructure.module';
 import { ConfigModule } from '@nestjs/config';
 import { CqrsModule } from '@nestjs/cqrs';
+import { SharedModule } from './shared/shared.module';
 
 @Module({
   imports: [
     CqrsModule.forRoot(),
     ConfigModule.forRoot({ isGlobal: true }),
     CoreModule,
+    SharedModule,
   ],
   controllers: [AppController],
   providers: [AppService],
@@ -22,6 +24,8 @@ export class AppModule {
     return {
       module: AppModule,
       imports: [
+        CqrsModule.forRoot(),
+        SharedModule,
         CoreModule.forRoot(options),
         AlarmsModule.withInfrastructure(
           AlarmInfrastructureModule.use(options.driver),
